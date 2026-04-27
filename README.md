@@ -37,4 +37,4 @@ A aplicação permite o controle completo de tarefas (CRUD), possibilitando ao u
 - O layout foi pensado para ser limpo e intuitivo, utilizando CSS puro para demonstrar domínio sobre a estilização.
 
 ---
-Desenvolvido por [Seu Nome/Seu Usuário do GitHub]
+
