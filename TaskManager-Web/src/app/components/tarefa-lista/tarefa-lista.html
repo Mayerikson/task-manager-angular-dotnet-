@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Lista de Tarefas</h2>
+
+  <div class="actions">
+    <button routerLink="/tarefas/nova" class="btn btn-primary">Nova Tarefa</button>
+    <div class="filters">
+      <span>Filtrar por:</span>
+      <button (click)="setFiltro('Todos')" [class.active]="filtroStatus === 'Todos'">Todas</button>
+      <button (click)="setFiltro('Pendente')" [class.active]="filtroStatus === 'Pendente'">Pendentes</button>
+      <button (click)="setFiltro('Concluída')" [class.active]="filtroStatus === 'Concluída'">Concluídas</button>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Data de Criação</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarefa of tarefasFiltradas">
+        <td>{{ tarefa.titulo }}</td>
+        <td>{{ tarefa.descricao }}</td>
+        <td>
+          <span [class.status-pendente]="tarefa.status === 'Pendente'" 
+                [class.status-concluida]="tarefa.status === 'Concluída'">
+            {{ tarefa.status }}
+          </span>
+        </td>
+        <td>{{ tarefa.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <button [routerLink]="['/tarefas/editar', tarefa.id]" class="btn btn-edit">Editar</button>
+          <button (click)="excluirTarefa(tarefa.id)" class="btn btn-delete">Excluir</button>
+        </td>
+      </tr>
+      <tr *ngIf="tarefasFiltradas.length === 0">
+        <td colspan="5" style="text-align: center;">Nenhuma tarefa encontrada.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

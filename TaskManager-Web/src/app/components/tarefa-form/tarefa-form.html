@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
+
+  <form (ngSubmit)="salvarTarefa()" #tarefaForm="ngForm">
+    <div class="form-group">
+      <label for="titulo">Título *</label>
+      <input type="text" id="titulo" name="titulo" [(ngModel)]="tarefa.titulo" required #titulo="ngModel" class="form-control">
+      <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="error">
+        O título é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" [(ngModel)]="tarefa.descricao" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" name="status" [(ngModel)]="tarefa.status" class="form-control">
+        <option value="Pendente">Pendente</option>
+        <option value="Concluída">Concluída</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="tarefaForm.invalid">
+        {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <button type="button" routerLink="/tarefas" class="btn btn-secondary">Cancelar</button>
+    </div>
+  </form>
+</div>
